@@ -25,10 +25,13 @@ function showSnow() {
 
 
 function playAudioFirstTime() {
-	if (audioPlayer.paused) {
-		playPause();
+	setTimeout(() => {
+		if (audioPlayer.paused) {
+			playPause();
 
-	}
+		}
+	}, 2000);
+
 }
 
 window.onload = (event) => {

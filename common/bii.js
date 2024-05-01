@@ -23,7 +23,15 @@ function showSnow() {
 	snowFall.snow(document.getElementsByTagName('body')[0], { round: true, shadow: true, flakeCount: flakeCount, minSize: 3, maxSize: 8 });
 }
 
+var isFirstTime = false;
 
+function playAudioFirstTime(params) {
+	if (!audioPlayer.paused || !isFirstTime) {
+		return;
+	}
+	isFirstTime = true;
+	playPause();
+}
 
 window.onload = (event) => {
 	setTimeout(function () {
@@ -83,9 +91,9 @@ if (biicore.bgMusic) {
 		}
 	}, 200);
 
-	function playPause(autoPlay = undefined) {
+	function playPause() {
 		document.getElementsByClassName("bii-player")[0].classList.remove("show-sec");
-		if (audioPlayer.paused || autoPlay === true) {
+		if (audioPlayer.paused) {
 			audioPlayer.play();
 			document.getElementById("playerVolumeOff").style.display = "none";
 			document.getElementById("playerVolumeOn").style.display = "block";

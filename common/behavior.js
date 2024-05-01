@@ -26,8 +26,8 @@ function showSnow() {
 
 function playAudioFirstTime() {
 	setTimeout(() => {
-		if (audioPlayer.paused) {
-			playPause();
+		if (audioPlayer.paused && !userAction) {
+			play();
 
 		}
 	}, 2000);
@@ -64,7 +64,18 @@ window.onload = (event) => {
 	});
 };
 
+function play() {
+	audioPlayer.play();
+	document.getElementById("playerVolumeOff").style.display = "none";
+	document.getElementById("playerVolumeOn").style.display = "block";
+}
+function pause() {
+	audioPlayer.pause();
+	document.getElementById("playerVolumeOff").style.display = "block";
+	document.getElementById("playerVolumeOn").style.display = "none";
+}
 
+var userAction = false;
 
 if (biicore.bgMusic) {
 	var audioPlayer = document.createElement("AUDIO");
@@ -95,14 +106,11 @@ if (biicore.bgMusic) {
 	function playPause() {
 		document.getElementsByClassName("bii-player")[0].classList.remove("show-sec");
 		if (audioPlayer.paused) {
-			audioPlayer.play();
-			document.getElementById("playerVolumeOff").style.display = "none";
-			document.getElementById("playerVolumeOn").style.display = "block";
+			play();
 		} else {
-			audioPlayer.pause();
-			document.getElementById("playerVolumeOff").style.display = "block";
-			document.getElementById("playerVolumeOn").style.display = "none";
+			pause();
 		}
+		userAction = true;
 	}
 	document.write(`
 	<style type="text/css">

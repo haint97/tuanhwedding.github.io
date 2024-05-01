@@ -23,14 +23,12 @@ function showSnow() {
 	snowFall.snow(document.getElementsByTagName('body')[0], { round: true, shadow: true, flakeCount: flakeCount, minSize: 3, maxSize: 8 });
 }
 
-var isFirstTime = false;
 
-function playAudioFirstTime(params) {
-	if (!audioPlayer.paused || !isFirstTime) {
-		return;
+function playAudioFirstTime() {
+	if (audioPlayer.paused) {
+		playPause();
+
 	}
-	isFirstTime = true;
-	playPause();
 }
 
 window.onload = (event) => {

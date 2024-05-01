@@ -23,13 +23,7 @@ function showSnow() {
 	snowFall.snow(document.getElementsByTagName('body')[0], { round: true, shadow: true, flakeCount: flakeCount, minSize: 3, maxSize: 8 });
 }
 
-document.body.addEventListener("mousemove", function () {
-	if (!audioPlayer.paused) {
-		return;
-	}
-	playPause();
 
-})
 
 window.onload = (event) => {
 	setTimeout(function () {
@@ -89,9 +83,9 @@ if (biicore.bgMusic) {
 		}
 	}, 200);
 
-	function playPause() {
+	function playPause(autoPlay = undefined) {
 		document.getElementsByClassName("bii-player")[0].classList.remove("show-sec");
-		if (audioPlayer.paused) {
+		if (audioPlayer.paused || autoPlay === true) {
 			audioPlayer.play();
 			document.getElementById("playerVolumeOff").style.display = "none";
 			document.getElementById("playerVolumeOn").style.display = "block";
@@ -145,7 +139,7 @@ if (biicore.bgMusic) {
 	}
 	</style>
 	<div class="bii-player">
-		<div class="bii-player-secondary"><div class="bii-player-secondary-content">Click vào đây nếu bạn muốn phát nhạc!</div></div>
+		<div onclick="playPause();" class="bii-player-secondary"><div class="bii-player-secondary-content">Click vào đây nếu bạn muốn phát nhạc!</div></div>
 		<div onclick="playPause();" class="playerIcon">
 			<span id="playerVolumeOff">
 				<svg xmlns="http://www.w3.org/2000/svg" width="25" height="27" fill="#fff" class="bi bi-volume-mute-fill" viewBox="0 0 16 16">
